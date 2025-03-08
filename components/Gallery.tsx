@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Camera } from 'lucide-react';
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { cn } from '@/lib/utils';
 
 const Gallery = () => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  
   // Image links array
   const imgLinks = [
     '/gallery/image_1.webp',
@@ -41,92 +44,142 @@ const Gallery = () => {
     imgLinks.slice(Math.ceil(imgLinks.length / 3) * 2)
   ];
 
-  const handleImageClick = (link: string | React.SetStateAction<null>) => {
-    if (typeof link === 'string') {
-      setSelectedImage(link);
-    }
-  };
-
   // Extract image number from link
   const getImageNumber = (link: string) => {
     const match = link.match(/image_(\d+)\.webp/);
     return match ? match[1] : '';
   };
 
-  return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      {/* Header */}
-      <div className="max-w-7xl mx-auto mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Gallery</h1>
-        <div className="h-1 w-20 bg-blue-500"></div>
-      </div>
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1
+      }
+    }
+  };
 
-      {/* Masonry Grid */}
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  const item = {
+    hidden: { 
+      opacity: 0,
+      y: 10
+    },
+    show: { 
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  // Random offset for each image
+  const getRandomOffset = () => {
+    const offsets = [-4, -2, 0, 2, 4];
+    return offsets[Math.floor(Math.random() * offsets.length)];
+  };
+
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-white to-transparent dark:from-transparent dark:via-gray-900 dark:to-transparent py-24 sm:py-32">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] dark:opacity-20"></div>
+
+      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="mx-auto max-w-2xl text-center mb-16"
+        >
+          <div className="mb-8 inline-flex items-center justify-center gap-2 rounded-full bg-blue-500/10 dark:bg-blue-400/10 px-4 py-2 text-base text-blue-700 dark:text-blue-300 ring-1 ring-blue-700/10 dark:ring-blue-400/20">
+            <Camera className="h-5 w-5" />
+            Photo Gallery
+          </div>
+          <h2 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl">
+            Capturing{' '}
+            <span className="bg-gradient-to-r from-blue-600 to-sky-500 dark:from-blue-400 dark:to-sky-300 bg-clip-text text-transparent">
+              Moments
+            </span>
+          </h2>
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
+            A collection of memories from our previous conferences
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {columns.map((column, colIndex) => (
             <div key={colIndex} className="space-y-8">
-              {column.map((link, imgIndex) => (
-                <div
-                  key={link}
-                  className={`
-                    relative group overflow-hidden rounded-lg shadow-lg
-                    transform transition-all duration-300 hover:scale-[1.02]
-                    ${imgIndex % 2 === 0 ? 'translate-y-0' : 'translate-y-12'}
-                  `}
-                  onClick={() => handleImageClick(link)}
-                >
-                  <div className="aspect-w-16 aspect-h-9">
-                    <img
-                      src={link}
-                      alt={`Gallery image ${getImageNumber(link)}`}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  
-                  {/* Overlay */}
-                  <div className="
-                    absolute inset-0 bg-gradient-to-t from-black/60 to-transparent
-                    opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                  ">
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <p className="text-white text-sm">
-                        Image {getImageNumber(link)}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+              {column.map((link, imgIndex) => {
+                const randomOffset = getRandomOffset();
+                return (
+                  <Dialog key={link}>
+                    <DialogTrigger asChild>
+                      <motion.div
+                        variants={item}
+                        whileHover={{ 
+                          scale: 1.02,
+                          transition: { duration: 0.3, ease: "easeOut" }
+                        }}
+                        className={cn(
+                          "group relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500/5 to-sky-500/5 p-1",
+                          "backdrop-blur-xl transition-all duration-300 cursor-pointer",
+                          "hover:from-blue-500/10 hover:to-sky-500/10 dark:from-blue-400/5 dark:to-sky-300/5",
+                          `translate-y-[${randomOffset}px]`
+                        )}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-sky-500/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        <div className="aspect-w-16 aspect-h-9 overflow-hidden">
+                          <Image
+                            src={link}
+                            alt={`Gallery image ${getImageNumber(link)}`}
+                            className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-[1.02]"
+                            width={1000}
+                            height={1000}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <div className="absolute bottom-0 left-0 right-0 p-4">
+                              <p className="text-white text-sm font-medium transform transition-all duration-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                                Image {getImageNumber(link)}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-5xl border-none bg-transparent p-0">
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="relative overflow-hidden rounded-lg"
+                      >
+                        <Image
+                          src={link}
+                          alt={`Gallery image ${getImageNumber(link)} - Enlarged View`}
+                          className="object-contain rounded-lg"
+                          width={1920}
+                          height={1080}
+                          priority
+                        />
+                      </motion.div>
+                    </DialogContent>
+                  </Dialog>
+                );
+              })}
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
-
-      {/* Modal */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div className="relative max-w-6xl w-full">
-            <img
-              src={selectedImage}
-              alt={`Selected gallery image ${getImageNumber(selectedImage)}`}
-              className="w-full h-full object-contain rounded-lg"
-            />
-            <button
-              className="absolute top-4 right-4 text-white bg-black/50 rounded-full p-2
-                hover:bg-black/75 transition-colors duration-200"
-              onClick={() => setSelectedImage(null)}
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
+    </section>
   );
 };
 

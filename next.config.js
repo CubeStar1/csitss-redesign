@@ -2,7 +2,15 @@
 module.exports = {
   reactStrictMode: true,
   experimental: {
-    outputStandalone: true,
+    output: 'standalone',
+  },
+  images: {
+    remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: '*',
+        }
+    ],
   },
 
   //    used preReact to reduce the bundle size and faster response rate.
