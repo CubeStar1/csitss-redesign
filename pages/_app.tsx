@@ -10,7 +10,7 @@ import NextTopLoader from "nextjs-toploader";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-      <NextTopLoader />
+      <NextTopLoader showSpinner={false} />
       <Header />
       <main className="min-h-screen">
         <NextSeo
