@@ -1,29 +1,30 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { ModeToggle } from "./theme-switcher"
-import { usePathname } from "next/navigation"
-import Image from "next/image"
-import { cn } from "@/lib/utils"
-import { NavigationMobile } from "./header-mobile"
-import { motion, useAnimationControls, LayoutGroup } from "framer-motion"
+import * as React from "react";
+import Link from "next/link";
+import { ModeToggle } from "./theme-switcher";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { NavigationMobile } from "./header-mobile";
+import { motion, useAnimationControls, LayoutGroup } from "framer-motion";
 
 const navigationLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/speakers', label: 'Speakers' },
-  { href: '/papers', label: 'Papers' },
-  { href: '/registration', label: 'Registration' },
-  { href: '/awards', label: 'Awards' },
-  { href: '/sponsorship', label: 'Sponsors' },
-  { href: '/tracks', label: 'Tracks' },
-  { href: '/contact', label: 'Contact' },
-]
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/committee", label: "Committee" },
+  { href: "/speakers", label: "Speakers" },
+  { href: "/papers", label: "Papers" },
+  { href: "/registration", label: "Registration" },
+  { href: "/awards", label: "Awards" },
+  { href: "/sponsorship", label: "Sponsors" },
+  { href: "/tracks", label: "Tracks" },
+  { href: "/contact", label: "Contact" },
+];
 
 function BlobBackground() {
   return (
-    <div className="absolute inset-0 pointer-events-none">
+    <div className="pointer-events-none absolute inset-0">
       <svg width="100%" height="100%" className="absolute inset-0">
         <defs>
           <linearGradient id="blob-gradient" x1="0" x2="1" y1="0" y2="1">
@@ -37,63 +38,62 @@ function BlobBackground() {
         </defs>
       </svg>
     </div>
-  )
+  );
 }
 
 export function Header() {
-  const pathname = usePathname()
-  const [isScrolled, setIsScrolled] = React.useState(false)
-  const blobControls = useAnimationControls()
+  const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = React.useState(false);
+  const blobControls = useAnimationControls();
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      <div className="" />
-      
-      <motion.header 
-        initial={{ y: -100 }}
+      <div className="m-10" />
+
+      <motion.header
+        initial={{ y: 0 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className="fixed top-4 left-0 right-0 z-40 mx-auto max-w-5xl"
+        className="fixed left-0 right-0 top-0 z-40"
       >
-        
-        <div className={cn(
-          "mx-4 rounded-full border bg-background/60 backdrop-blur-xl transition-all duration-500",
-          isScrolled ? "shadow-lg bg-background/80" : "shadow-sm"
-        )}>
-          <div className="flex h-14 items-center justify-between px-4">
-            <Link href="/" className="flex items-center gap-3 relative group">
-                <Image
-                  src="/logos/rvce_logo.png"
-                  alt="RVCE logo"
-                  width={32}
-                  height={32}
-                  className="rounded-sm"
-                />
+        <motion.div
+          animate={{
+            maxWidth: isScrolled ? "64rem" : "100%",
+            margin: isScrolled ? "1rem auto" : "0 auto",
+            borderRadius: isScrolled ? "9999px" : "0",
+          }}
+          transition={{
+            duration: 0.3,
+            ease: "easeInOut",
+          }}
+          className={cn("bg-background/60 border backdrop-blur-xl transition-all duration-500", isScrolled ? "bg-background/80 mx-4 shadow-lg" : "shadow-sm")}
+        >
+          <div className={cn("flex items-center justify-between px-4", isScrolled ? "h-14" : "h-16")}>
+            <Link href="/" className="group relative flex items-center gap-3">
+              <Image src="/logos/rvce_logo.png" alt="RVCE logo" width={32} height={32} className="rounded-sm" />
               <span className="font-medium">CSITSS 2025</span>
             </Link>
 
-            <nav className="hidden md:block relative">
+            <nav className="relative hidden md:block">
               <LayoutGroup>
                 <motion.ul className="flex items-center gap-1">
                   {navigationLinks.map((item) => {
-                    const isActive = pathname === item.href
+                    const isActive = pathname === item.href;
                     return (
                       <motion.li key={item.href} className="relative">
                         <Link
                           href={item.href}
                           className={cn(
                             "relative rounded-full px-3 py-1.5 text-sm transition-colors duration-200",
-                            isActive 
-                              ? "text-primary font-medium" 
-                              : "text-muted-foreground hover:text-primary"
+                            isActive ? "text-primary font-medium" : "text-muted-foreground hover:text-primary"
                           )}
                         >
                           {item.label}
@@ -101,19 +101,19 @@ export function Header() {
                         {isActive && (
                           <motion.div
                             layoutId="blob"
-                            className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/20 to-sky-400/20 dark:from-blue-500/10 dark:to-sky-400/10 -z-10"
-                            transition={{ 
-                              type: "spring", 
-                              stiffness: 400, 
+                            className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-blue-500/20 to-sky-400/20 dark:from-blue-500/10 dark:to-sky-400/10"
+                            transition={{
+                              type: "spring",
+                              stiffness: 400,
                               damping: 30,
-                              mass: 1
+                              mass: 1,
                             }}
                           >
                             <BlobBackground />
                           </motion.div>
                         )}
                       </motion.li>
-                    )
+                    );
                   })}
                 </motion.ul>
               </LayoutGroup>
@@ -126,8 +126,8 @@ export function Header() {
               <ModeToggle />
             </div>
           </div>
-        </div>
+        </motion.div>
       </motion.header>
     </>
-  )
+  );
 }

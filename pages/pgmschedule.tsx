@@ -1,501 +1,161 @@
-import React from 'react'
-import { Tabs } from '@mantine/core'
+"use client";
 
-export default function pgmschedule() {
-  const Day1 = [
-    {
-      head: [
-        [
-          '6 INTERNATIONAL CONFERENCE on Computational Systems & Information Technology Sustainable Solutions [CSITSS-2022] (Tentative schedule, Subject to changes.)',
-        ],
-        ['TUTORIAL DAY: DAY 1 SCHEDULE/ 21-12-2022'],
-      ],
-      columns: [
-        'PRE TUTORIAL TRACK 01',
-        '',
-        ' Processors & Communication Systems',
-        'BT Seminar Hall',
-      ],
-      rows: [
-        [
-          '9:30AM to 11:00AM',
-          // "Mr. G Balaj, ABB",
-          'Signal Processing and Health Care : Our endeavors during the COVID-19 Lockdown',
-          'Dr.Sriram Ganapathy, Associate Professor, Electrical Engineering, IISc Bangalore',
-          // "Mr. G Balaji, ABB",
-          'BT Seminar Hall',
-        ],
-        ['11.00AM to 11.30AM', '----', 'High Tea', ''],
-        [
-          '11.30AM to 01.00PM',
-          'NiralOS : Open and Disaggregated Private 5G and Edge Infrastructure Platform for Enterprise Operational Effectiveness',
-          'Abhijit Chaudhary is the Founder and CEO of Niral Networks',
-          'BT Seminar Hall',
-        ],
-        ['01.00PM to 02.00PM', '---', 'Lunch', '----'],
-        [
-          '02.00PM to 03.15PM',
-          'FGPAs for wireless Communications',
-          'Hariprasad Bhat,Manager-FGPA Solutions, Leka Wireless & team',
-          'BT Seminar Hall',
-        ],
-        ['03.15PM to 03.30PM', '----', 'High Tea', '----'],
-        [
-          '03.30PM to 04.30PM',
-          'FGPAs for wireless Communications',
-          'Hariprasad Bhat,Manager-FGPA Solutions, Leka Wireless & team',
-          'BT Seminar Hall',
-        ],
-      ],
+import { motion } from "framer-motion";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Day1, Day2, Day3, ScheduleData } from "@/data/program-schedule";
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
     },
-    {
-      head: [
-        [
-          '6 INTERNATIONAL CONFERENCE on Computational Systems & Information Technology Sustainable Solutions [CSITSS-2022] (Tentative schedule, Subject to changes.)',
-        ],
-        ['TUTORIAL DAY: DAY 1 SCHEDULE/ 21-12-2022'],
-      ],
-      columns: [
-        'PRE TUTORIAL TRACK 2',
-        '',
-        'Computing Systems and Applications & Intelligent Systems Venue',
-        'MCA Seminar Hall',
-      ],
-      rows: [
-        [
-          '09:30AM to 11:00AM',
-          // "Mr. G Balaj, ABB",
-          'Question answering using information retrieval techniques',
-          'Dr. Jyotirmoy Banerjee, Mr. Srinivas Kundeti, Mr. L Raghunatha Reddy and Mr. Sridhar D Kamoji, Ercrisson ',
-          // "Mr. G Balaji, ABB",
-          'MCA Seminar Hall',
-        ],
-        ['11.00AM to 11.30AM', '----', 'High Tea', '----'],
-        [
-          '11.30AM to 01.00PM',
-          'Question answering using information retrieval techniques',
-          ' Dr. Jyotirmoy Banerjee, Mr. Srinivas Kundeti, Mr. L Raghunatha Reddy and Mr. Sridhar D Kamoji',
-          'MCA Seminar Hall',
-        ],
-        ['01.00PM to 02.00PM', '----', 'Lunch', '----'],
-        [
-          '02.00PM to 03.15PM',
-          'Data modeling for weather and climate study',
-          'Dr K C Gouda,Principal Scientist,National Aeronautics Laboratory',
-          'MCA Seminar Hall',
-        ],
-        ['03.15PM to 03.30PM', '----', 'High Tea', '----'],
-        [
-          '03.30PM to 04.30PM',
-          'Data modeling for weather and climate study',
-          'Dr K C Gouda,Principal Scientist,National Aeronautics Laboratory',
-          'MCA Seminar Hall',
-        ],
-      ],
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15,
     },
-    {
-      head: [
-        [
-          '6 INTERNATIONAL CONFERENCE on Computational Systems & Information Technology Sustainable Solutions [CSITSS-2022] (Tentative schedule, Subject to changes.)',
-        ],
-        ['TUTORIAL DAY: DAY 1 SCHEDULE/ 21-12-2022'],
-      ],
-      columns: [
-        'PRE TUTORIAL TRACK 3',
-        '',
-        'Sensors: Sensors, Automation & Process Control; Energy Systems',
-        'IEM Seminar Hall',
-      ],
+  },
+};
 
-      rows: [
-        [
-          '9:30AM to 11:00AM',
-          // "Mr. G Balaj, ABB",
-          'Pre Tutorial:  Energy Systems',
-          'Mangesh Nawarange, Jain University',
-          // "Mr. G Balaji, ABB",
-          'IEM Seminar Hall',
-        ],
-        ['11.00AM to 11.30AM', '----', 'High Tea', '----'],
-        [
-          '11.30AM to 01.00PM',
-          'Energy Systems Demo at ABB Lab,Department of EEE,RVCE',
-          'Dr. Srivani, HOD, EEE, RVCE',
-          'IEM Seminar Hall',
-        ],
-        // [
-        //     "11.30AM to 01.00PM",
-        //     "Demo:  Energy Systems",
-        //     "Dr. Srivani, HOD, EEE, RVCE",
-        //     "ABB LAB, EEE, RVCE",
-        // ],
-        ['01.00PM to 02.00PM', '----', 'Lunch', '----'],
-        [
-          '02.00PM to 03.15PM',
-          'Smart Sensors amnd its Applications',
-          'Dr K Natarajan , Research Coorinatior, Jain University',
-          'IEM Seminar Hall',
-        ],
-        ['03.15PM to 03.30PM', '----', 'High Tea', '----'],
-        [
-          '03.30PM to 04.30PM',
-          'Smart Sensors amnd its Applications',
-          'Dr K Natarajan , Research Coorinatior, Jain University',
-          'IEM Seminar Hall',
-        ],
-      ],
-    },
-  ]
-
-  const Day2 = {
-    head: [
-      [
-        '6 INTERNATIONAL CONFERENCE on Computational Systems & Information Technology Sustainable Solutions [CSITSS-2022] (Tentative schedule, Subject to changes.)',
-      ],
-      ['Inaguration/ Day 2/ 22-12-2022'],
-    ],
-    columns: ['Time', 'Topic', 'Speaker', 'Venue'],
-
-    rows: [
-      [
-        '10.00AM TO 11.00AM',
-        // "Mr. G Balaj, ABB",
-        'Inauguration',
-        '',
-        // "Mr. G Balaji, ABB",
-        'IEM Auditorium',
-      ],
-      [
-        '11.00AM TO 11.30AM',
-        // "Mr. G Balaj, ABB",
-        '-------',
-        'High Tea',
-        // "Mr. G Balaji, ABB",
-        '-------',
-      ],
-      [
-        '11.30AM TO 12.15PM',
-        // "Mr. G Balaj, ABB",
-        'Next generation of Cyber Forensics: A Road Map ',
-        ':Dr.S S Iyengar is a world-renowned computer scientist and a Director of US Army funded Centre of Excellence in Digital Forensics in USA',
-        // "Mr. G Balaji, ABB",
-        'IEM Auditorium',
-      ],
-      [
-        '12.15AM TO 01.00PM',
-        // "Mr. G Balaj, ABB",
-        'The Future of Computing',
-        ' Dr. L Venkata Subramaniam an IBM Distinguished Quantum Ambassador. ',
-        // "Mr. G Balaji, ABB",
-        'IEM Auditorium',
-      ],
-      [
-        ' 01.00PM TO 02.00PM',
-        // "Mr. G Balaj, ABB",
-        '-------',
-        'LUNCH',
-        // "Mr. G Balaji, ABB",
-        '-------',
-      ],
-      [
-        '02.00PM TO 02.45PM',
-        // "Mr. G Balaj, ABB",
-        'Plenary Talk:',
-        'Expert Committee from Progress Software        ',
-        // "Mr. G Balaji, ABB",
-        'Venue: BT Seminar Hall',
-      ],
-      [
-        '02.45PM to 03.00PM',
-        // "Mr. G Balaj, ABB",
-        '-------',
-        'TEA Break',
-        // "Mr. G Balaji, ABB",
-        '-------',
-      ],
-      [
-        '03.00PM to 04.45PM',
-        // "Mr. G Balaj, ABB",
-        'TRACK 1:',
-        'Sensors: Sensors, Automation & Process Control; Energy Systems  Paper ID: 85,147,164,192,156,53       ',
-        // "Mr. G Balaji, ABB",
-        'Venue: BT Seminar Hall',
-      ],
-      [
-        '  ',
-        // "Mr. G Balaj, ABB",
-        'TRACK 2:',
-        'Communication Systems-1 Paper ID:9,36,158,190,229,230  ',
-        // "Mr. G Balaji, ABB",
-        'Venue: MCA Seminar Hall        ',
-      ],
-      [
-        '  ',
-        // "Mr. G Balaj, ABB",
-        'TRACK 3:',
-        ' Intelligent Systems-1  Paper ID:108,118,243,122,154,59       ',
-        // "Mr. G Balaji, ABB",
-        'Venue: MCA Seminar Hall        ',
-      ],
-    ],
-  }
-
-  const Day3 = {
-    head: [
-      [
-        '6 INTERNATIONAL CONFERENCE on Computational Systems & Information Technology Sustainable Solutions [CSITSS-2022]',
-      ],
-      ['Conference Day 3/ 23-12-2022'],
-    ],
-    columns: ['Time', 'Event', 'Venue'],
-
-    rows: [
-      [
-        '9:30-10:15',
-        'Plenary Talk - A keynote speech on 5G and Nokia’s sustainable solutions in 5G area which covers not just the 5G ecosystem but also the various enterprise and CSP use cases/solutions where Nokia is already focussing on to make an impact when it comes to sustainable solutions and Environmental Social Governance (ESG) for Industry 4.0, Innovation, infrastructure and improve global economic growth.Speaker: Sunil Kumar G, Head - Industrialization & Commercialization, CNS EnSo SIS, Senior Executive with 28 years track record of successful strategic leadership in the Telecom and IT space with core competencies in Consulting, Operations, Delivery, Pre- Sales, Program management, System Integration, Automation, Testing and Product Management.Successfully built & managed services and product businesses across Europe, Americas, APAC and India including several key onsite engagements in UK, APAC, USA including an independent consultant role in Brazil.',
-        'BT Seminar Hall',
-      ],
-      [
-        '10:15-11:00',
-        'Invited Talk- by Dr. Devesh Dwivedi, PhD India Site Leader, Global Foundries',
-        'BT Seminar Hall',
-      ],
-      ['11:15-11:30', 'TEA BREAK', ''],
-      [
-        '11:30-1:00',
-        'TRACK 1: Processors: VLSI Design & Embedded Systems: Paper ID:13,24,168,257,92',
-        'BT Seminar Hall',
-      ],
-      [
-        '',
-        'TRACK 2: Computing Systems and Applications-1 : Paper ID:54,148,167,242,261,120',
-        'MCA Seminar Hall',
-      ],
-      [
-        '',
-        'TRACK 3: Intelligent Systems-2 : Paper ID:132,138,142,144,146,149',
-        ' IEM Seminar Hall',
-      ],
-      ['1:00-2:00', 'LUNCH', 'Food Court'],
-      ['2:00-2:25', 'Plenary Talk/TEA BREAK', ''],
-      [
-        '3:00-4:30',
-        'TRACK 1: Intelligent Systems-3:Paper ID:150,129,202,215,226,228',
-        'BT Seminar Hall',
-      ],
-      [
-        '',
-        'TRACK 2: Communication Systems-2:Paper ID:238,19,254,251',
-        'MCA Seminar Hall',
-      ],
-      [
-        '',
-        'TRACK 3: Intelligent Systems-4:ID:235,237,240,241,256',
-        'IEM Seminar Hall',
-      ],
-      ['4:30-5:00', 'Valedictory', 'BT Seminar Hall'],
-    ],
-  }
+function ScheduleTable({ data }: { data: ScheduleData }) {
   return (
-    <>
-      <div>
-        <Tabs grow>
-          <Tabs.Tab label="DAY 1">
-            <aside className=" p-12 sm:p-16 lg:p-24">
-              <div className="block">
-                {Day1[0].head.map((row) => (
-                  <>
-                    <th className="block text-blue-800">{row[0]}</th>
-                  </>
+    <div className="relative overflow-hidden rounded-xl border border-gray-200/50">
+      {/* Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50" />
+
+      <div className="relative">
+        <Table>
+          <TableHeader>
+            <TableRow className="hover:bg-transparent">
+              {data.columns.map((col: string, index: number) => (
+                <TableHead
+                  key={index}
+                  className="h-12 whitespace-nowrap border-b border-gray-200/50 bg-gray-100/80 font-semibold text-gray-700 backdrop-blur-sm"
+                >
+                  {col}
+                </TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.rows.map((row: string[], index: number) => (
+              <TableRow
+                key={index}
+                className={`
+                  transition-colors hover:bg-gray-50/50
+                  ${index % 2 === 0 ? "bg-white/80" : "bg-gray-50/80"}
+                `}
+              >
+                {row.map((cell: string, cellIndex: number) => (
+                  <TableCell
+                    key={cellIndex}
+                    className={`border-b border-gray-100/50 py-4 ${cellIndex === 0 ? "whitespace-nowrap font-medium text-gray-900" : ""} ${
+                      cell === "High Tea" || cell === "Lunch" || cell === "TEA BREAK" || cell === "LUNCH" ? "font-medium text-blue-600" : "text-gray-600"
+                    } ${cellIndex === row.length - 1 ? "whitespace-nowrap text-gray-500" : ""}`}
+                  >
+                    {cell}
+                  </TableCell>
                 ))}
-                <th className="block text-gray-600">Program Schedule</th>
-              </div>
-              <p className="mt-4 text-gray-600">
-                <div className="overflow-x-auto">
-                  <br />
-                  <table className="min-w-full divide-y-2 divide-gray-200 border-2 text-sm sm:p-16 lg:p-24">
-                    <thead className="bg-gray-100">
-                      <tr>
-                        {Day1[0].columns.map((col) => (
-                          <th className="whitespace-nowrap px-2 py-2 text-left">
-                            {col}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                      {Day1[0].rows.map((row) => (
-                        <tr>
-                          <td className="whitespace-nowrap bg-gray-100 px-1 py-2  text-gray-700">
-                            {row[0]}
-                          </td>
-
-                          <td className=" px-1 py-2 text-gray-700">{row[1]}</td>
-
-                          <td className="bg-gray-100 px-1 py-2  text-gray-700">
-                            {row[2]}
-                          </td>
-
-                          <td className=" px-1 py-2 text-gray-700">{row[3]}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-
-                  <br />
-                  <table className="min-w-full divide-y-2 divide-gray-200 border-2 text-sm sm:p-16 lg:p-24">
-                    <thead className="bg-gray-100">
-                      <tr>
-                        {Day1[1].columns.map((col) => (
-                          <th className="whitespace-nowrap px-2 py-2 text-left">
-                            {col}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                      {Day1[1].rows.map((row) => (
-                        <tr>
-                          <td className="whitespace-nowrap bg-gray-100 px-1 py-2  text-gray-700">
-                            {row[0]}
-                          </td>
-
-                          <td className=" px-1 py-2 text-gray-700">{row[1]}</td>
-
-                          <td className="bg-gray-100 px-1 py-2  text-gray-700">
-                            {row[2]}
-                          </td>
-
-                          <td className=" px-1 py-2 text-gray-700">{row[3]}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-
-                  <br />
-                  <table className="min-w-full divide-y-2 divide-gray-200 border-2 text-sm sm:p-16 lg:p-24">
-                    <thead className="bg-gray-100">
-                      <tr>
-                        {Day1[2].columns.map((col) => (
-                          <th className="whitespace-nowrap px-2 py-2 text-left">
-                            {col}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                      {Day1[2].rows.map((row) => (
-                        <tr>
-                          <td className="whitespace-nowrap bg-gray-100 px-1 py-2  text-gray-700">
-                            {row[0]}
-                          </td>
-
-                          <td className=" px-1 py-2 text-gray-700">{row[1]}</td>
-
-                          <td className="bg-gray-100 px-1 py-2  text-gray-700">
-                            {row[2]}
-                          </td>
-
-                          <td className=" px-1 py-2 text-gray-700">{row[3]}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  <br />
-                </div>
-              </p>
-            </aside>
-          </Tabs.Tab>
-          <Tabs.Tab label="DAY 2">
-            <aside className=" p-12 sm:p-16 lg:p-24">
-              <div className="block">
-                {Day2.head.map((row) => (
-                  <>
-                    <th className="block text-blue-800">{row[0]}</th>
-                  </>
-                ))}
-                <th className="block text-gray-600">Program Schedule</th>
-              </div>
-              <p className="mt-4 text-gray-600">
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y-2 divide-gray-200 border-2 text-sm sm:p-16 lg:p-24">
-                    <thead className="bg-gray-100">
-                      <tr>
-                        {Day2.columns.map((col) => (
-                          <th className="whitespace-nowrap px-2 py-2 text-left">
-                            {col}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                      {Day2.rows.map((row) => (
-                        <tr>
-                          <td className="whitespace-nowrap bg-gray-100 px-1 py-2  text-gray-700">
-                            {row[0]}
-                          </td>
-
-                          <td className=" px-1 py-2 text-gray-700">{row[1]}</td>
-
-                          <td className="bg-gray-100 px-1 py-2  text-gray-700">
-                            {row[2]}
-                          </td>
-
-                          <td className=" px-1 py-2 text-gray-700">{row[3]}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </p>
-            </aside>
-          </Tabs.Tab>
-          <Tabs.Tab label="DAY 3">
-            <aside className=" p-12 sm:p-16 lg:p-24">
-              <div className="block">
-                {Day3.head.map((row) => (
-                  <>
-                    <th className="block text-blue-800">{row[0]}</th>
-                  </>
-                ))}
-                <th className="block text-gray-600">Program Schedule</th>
-              </div>
-              <p className="mt-4 text-gray-600">
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y-2 divide-gray-200 border-2 text-sm sm:p-16 lg:p-24">
-                    <thead className="bg-gray-100">
-                      <tr>
-                        {Day3.columns.map((col) => (
-                          <th className="whitespace-nowrap px-2 py-2 text-center">
-                            {col}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                      {Day3.rows.map((row) => (
-                        <tr>
-                          <td className="whitespace-nowrap bg-gray-100 px-1 py-2  text-gray-700">
-                            {row[0]}
-                          </td>
-
-                          <td className="px-1 py-2 text-justify text-gray-700">
-                            {row[1]}
-                          </td>
-
-                          <td className="whitespace-nowrap bg-gray-100 px-1 py-2  text-gray-700">
-                            {row[2]}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </p>
-            </aside>
-          </Tabs.Tab>
-        </Tabs>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
-    </>
-  )
+    </div>
+  );
+}
+
+export default function ProgramSchedule() {
+  return (
+    <motion.div
+      initial="hidden"
+      animate="show"
+      variants={container}
+      className="relative min-h-screen overflow-hidden bg-gradient-to-b from-white via-white to-transparent dark:from-gray-900 dark:via-gray-900 dark:to-transparent"
+    >
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] dark:opacity-20" />
+
+      {/* Decorative Blobs */}
+      <div className="absolute right-0 top-1/4 -z-10 h-96 w-96 translate-x-1/3 transform rounded-full bg-gradient-to-br from-blue-500/20 to-sky-500/20 blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 -z-10 h-96 w-96 -translate-x-1/3 transform rounded-full bg-gradient-to-br from-sky-500/20 to-blue-500/20 blur-3xl" />
+
+      <div className="container relative mx-auto px-4 py-16">
+        <motion.div variants={item} className="mb-12 text-center">
+          <span className="mb-3 block text-sm font-medium uppercase tracking-wider text-blue-600 dark:text-blue-400">Conference Schedule</span>
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900 md:text-5xl dark:text-gray-50">Program Schedule</h1>
+          <div className="mx-auto mt-6 h-1 w-20 rounded-full bg-gradient-to-r from-blue-600 to-sky-500" />
+        </motion.div>
+
+        <motion.div variants={item} className="relative z-10">
+          <Tabs defaultValue="day1" className="w-full">
+            <TabsList className="mb-8 grid w-full grid-cols-3 rounded-xl border border-gray-200/50 bg-white/50 p-1 backdrop-blur-sm dark:border-gray-700/30 dark:bg-gray-800/50">
+              <TabsTrigger
+                value="day1"
+                className="rounded-lg text-gray-600 transition-all duration-300 data-[state=active]:border-none data-[state=active]:bg-gradient-to-br data-[state=active]:from-blue-500 data-[state=active]:to-sky-500 data-[state=active]:text-white data-[state=active]:shadow-md dark:text-gray-300 dark:data-[state=active]:text-white"
+              >
+                Day 1
+              </TabsTrigger>
+              <TabsTrigger
+                value="day2"
+                className="rounded-lg text-gray-600 transition-all duration-300 data-[state=active]:border-none data-[state=active]:bg-gradient-to-br data-[state=active]:from-blue-500 data-[state=active]:to-sky-500 data-[state=active]:text-white data-[state=active]:shadow-md dark:text-gray-300 dark:data-[state=active]:text-white"
+              >
+                Day 2
+              </TabsTrigger>
+              <TabsTrigger
+                value="day3"
+                className="rounded-lg text-gray-600 transition-all duration-300 data-[state=active]:border-none data-[state=active]:bg-gradient-to-br data-[state=active]:from-blue-500 data-[state=active]:to-sky-500 data-[state=active]:text-white data-[state=active]:shadow-md dark:text-gray-300 dark:data-[state=active]:text-white"
+              >
+                Day 3
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="day1" className="space-y-8 focus-visible:outline-none">
+              <div className="prose prose-gray dark:prose-invert max-w-none">
+                <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-50">{Day1[0].head[1][0]}</h2>
+              </div>
+              {Day1.map((track, index) => (
+                <motion.div key={index} variants={item} className="overflow-hidden">
+                  <h3 className="mb-4 text-xl font-medium text-gray-800 dark:text-gray-200">
+                    Track {index + 1}: {track.columns[2]}
+                  </h3>
+                  <ScheduleTable data={track} />
+                </motion.div>
+              ))}
+            </TabsContent>
+
+            <TabsContent value="day2">
+              <motion.div variants={item} className="space-y-8">
+                <div className="prose prose-gray dark:prose-invert max-w-none">
+                  <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-50">{Day2.head[1][0]}</h2>
+                </div>
+                <ScheduleTable data={Day2} />
+              </motion.div>
+            </TabsContent>
+
+            <TabsContent value="day3">
+              <motion.div variants={item} className="space-y-8">
+                <div className="prose prose-gray dark:prose-invert max-w-none">
+                  <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-50">{Day3.head[1][0]}</h2>
+                </div>
+                <ScheduleTable data={Day3} />
+              </motion.div>
+            </TabsContent>
+          </Tabs>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
 }

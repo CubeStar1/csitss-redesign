@@ -1,21 +1,14 @@
-import { MapPin, Navigation, Hotel, X } from 'lucide-react'
-import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogClose,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { useState } from 'react'
+import { MapPin, Navigation, Hotel, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose, DialogTrigger } from "@/components/ui/dialog";
+import { useState } from "react";
 
 export function Venue() {
-  const [showImageModal, setShowImageModal] = useState(false)
+  const [showImageModal, setShowImageModal] = useState(false);
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-white to-transparent dark:from-transparent dark:via-gray-900 dark:to-transparent py-24 sm:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-white to-transparent py-24 sm:py-32 dark:from-transparent dark:via-gray-900 dark:to-transparent">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] dark:opacity-20"></div>
 
@@ -24,21 +17,17 @@ export function Venue() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mx-auto max-w-2xl text-center mb-16"
+          className="mx-auto mb-16 max-w-2xl text-center"
         >
-          <div className="mb-8 inline-flex items-center justify-center gap-2 rounded-full bg-blue-500/10 dark:bg-blue-400/10 px-4 py-2 text-base text-blue-700 dark:text-blue-300 ring-1 ring-blue-700/10 dark:ring-blue-400/20">
+          <div className="mb-8 inline-flex items-center justify-center gap-2 rounded-full bg-blue-500/10 px-4 py-2 text-base text-blue-700 ring-1 ring-blue-700/10 dark:bg-blue-400/10 dark:text-blue-300 dark:ring-blue-400/20">
             <MapPin className="h-5 w-5" />
             Conference Venue
           </div>
-          <h2 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl">
-            RV College of{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-sky-500 dark:from-blue-400 dark:to-sky-300 bg-clip-text text-transparent">
-              Engineering
-            </span>
+          <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-gray-50">
+            RV College of{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent dark:from-blue-400 dark:to-sky-300">Engineering</span>
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-            Mysore Road, RV Vidyaniketan Post, Bengaluru-560059
-          </p>
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">Mysore Road, RV Vidyaniketan Post, Bengaluru-560059</p>
         </motion.div>
 
         <div className="grid gap-8 lg:grid-cols-2">
@@ -66,7 +55,7 @@ export function Venue() {
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500/5 to-sky-500/5 p-1 backdrop-blur-xl transition-all hover:from-blue-500/10 hover:to-sky-500/10 dark:from-blue-400/5 dark:to-sky-300/5 cursor-pointer"
+                className="group relative cursor-pointer overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500/5 to-sky-500/5 p-1 backdrop-blur-xl transition-all hover:from-blue-500/10 hover:to-sky-500/10 dark:from-blue-400/5 dark:to-sky-300/5"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-sky-500/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 <img
@@ -102,7 +91,7 @@ export function Venue() {
               "group relative overflow-hidden rounded-full px-6 py-3 transition-all",
               "bg-gradient-to-r from-blue-600 to-sky-500 dark:from-blue-500 dark:to-sky-400",
               "text-sm font-semibold text-white shadow-md",
-              "hover:shadow-xl hover:from-blue-500 hover:to-sky-400",
+              "hover:from-blue-500 hover:to-sky-400 hover:shadow-xl",
               "inline-flex items-center justify-center gap-2"
             )}
           >
@@ -115,8 +104,8 @@ export function Venue() {
             className={cn(
               "group relative overflow-hidden rounded-full px-6 py-3 transition-all",
               "bg-white dark:bg-gray-800",
-              "text-sm font-semibold text-gray-900 dark:text-white shadow-md",
-              "hover:shadow-xl hover:bg-gray-50 dark:hover:bg-gray-700",
+              "text-sm font-semibold text-gray-900 shadow-md dark:text-white",
+              "hover:bg-gray-50 hover:shadow-xl dark:hover:bg-gray-700",
               "inline-flex items-center justify-center gap-2",
               "border border-gray-200 dark:border-gray-700"
             )}
@@ -128,5 +117,5 @@ export function Venue() {
         </motion.div>
       </div>
     </section>
-  )
-} 
+  );
+}

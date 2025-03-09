@@ -1,15 +1,17 @@
-/**@type{import('next).NextConfig} */
-module.exports = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   reactStrictMode: true,
-  experimental: {
-    output: 'standalone',
-  },
   images: {
     remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: '*',
-        }
+      {
+        protocol: "https",
+        hostname: "*",
+      },
+      {
+        protocol: "http",
+        hostname: "*",
+      },
     ],
   },
 
@@ -17,17 +19,19 @@ module.exports = {
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
       Object.assign(config.resolve.alias, {
-        react: 'preact/compat',
-        'react-dom/test-utils': 'preact/test-utils',
-        'react-dom': 'preact/compat',
-      })
+        react: "preact/compat",
+        "react-dom/test-utils": "preact/test-utils",
+        "react-dom": "preact/compat",
+      });
     }
-    return config
+    return config;
   },
-}
+};
 // const withBundleAnalyzer = require("@next/bundle-analyzer")({
 //   enabled: process.env.ANALYZE === "true",
 // });
 
 // module.exports = nextConfig;
 // module.exports = withBundleAnalyzer({});
+
+export default nextConfig;

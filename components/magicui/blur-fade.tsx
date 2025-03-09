@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  AnimatePresence,
-  motion,
-  useInView,
-  UseInViewOptions,
-  Variants,
-  MotionProps,
-} from "motion/react";
+import { AnimatePresence, motion, useInView, UseInViewOptions, Variants, MotionProps } from "motion/react";
 import { useRef } from "react";
 
 type MarginType = UseInViewOptions["margin"];
@@ -46,8 +39,7 @@ export function BlurFade({
   const isInView = !inView || inViewResult;
   const defaultVariants: Variants = {
     hidden: {
-      [direction === "left" || direction === "right" ? "x" : "y"]:
-        direction === "right" || direction === "down" ? -offset : offset,
+      [direction === "left" || direction === "right" ? "x" : "y"]: direction === "right" || direction === "down" ? -offset : offset,
       opacity: 0,
       filter: `blur(${blur})`,
     },

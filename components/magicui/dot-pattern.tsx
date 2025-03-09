@@ -60,18 +60,7 @@ interface DotPatternProps extends React.SVGProps<SVGSVGElement> {
  * - Dots color can be controlled via the text color utility classes
  */
 
-export function DotPattern({
-  width = 16,
-  height = 16,
-  x = 0,
-  y = 0,
-  cx = 1,
-  cy = 1,
-  cr = 1,
-  className,
-  glow = false,
-  ...props
-}: DotPatternProps) {
+export function DotPattern({ width = 16, height = 16, x = 0, y = 0, cx = 1, cy = 1, cr = 1, className, glow = false, ...props }: DotPatternProps) {
   const id = useId();
   const containerRef = useRef<SVGSVGElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -91,9 +80,7 @@ export function DotPattern({
 
   const dots = Array.from(
     {
-      length:
-        Math.ceil(dimensions.width / width) *
-        Math.ceil(dimensions.height / height),
+      length: Math.ceil(dimensions.width / width) * Math.ceil(dimensions.height / height),
     },
     (_, i) => {
       const col = i % Math.ceil(dimensions.width / width);
@@ -104,19 +91,11 @@ export function DotPattern({
         delay: Math.random() * 5,
         duration: Math.random() * 3 + 2,
       };
-    },
+    }
   );
 
   return (
-    <svg
-      ref={containerRef}
-      aria-hidden="true"
-      className={cn(
-        "pointer-events-none absolute inset-0 h-full w-full",
-        className,
-      )}
-      {...props}
-    >
+    <svg ref={containerRef} aria-hidden="true" className={cn("pointer-events-none absolute inset-0 h-full w-full", className)} {...props}>
       <defs>
         <radialGradient id={`${id}-gradient`}>
           <stop offset="0%" stopColor="currentColor" stopOpacity="1" />

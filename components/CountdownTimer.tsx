@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 // Define the type for the timeLeft state
 type TimeLeft = {
@@ -10,14 +10,13 @@ type TimeLeft = {
 
 const CountdownTimer = () => {
   const calculateTimeLeft = (): TimeLeft => {
-
     // Get current date in IST
     const now = new Date();
     const istOffset = 5.5 * 60 * 60 * 1000; // 5 hours 30 minutes in milliseconds
     const nowIST = new Date(now.getTime() + istOffset);
-    
+
     // Set the target date in IST
-    const targetDate = new Date('2024-11-08T00:00:00+05:30'); // Midnight of the target date in IST
+    const targetDate = new Date("2024-11-08T00:00:00+05:30"); // Midnight of the target date in IST
 
     const difference = +targetDate - +nowIST;
 
@@ -59,7 +58,7 @@ const CountdownTimer = () => {
     <div className="countdown-timer">
       {showCSITSS ? (
         <div className="csitss">
-          {'CSITSS'.split('').map((char, index) => (
+          {"CSITSS".split("").map((char, index) => (
             <div key={index} className="char">
               {char}
             </div>

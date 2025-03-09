@@ -1,53 +1,53 @@
-import React from 'react';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Camera } from 'lucide-react';
+import React from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Camera } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
 const Gallery = () => {
   // Image links array
   const imgLinks = [
-    '/gallery/image_1.webp',
-    '/gallery/image_2.webp',
-    '/gallery/image_3.webp',
-    '/gallery/image_4.webp',
-    '/gallery/image_5.webp',
-    '/gallery/image_6.webp',
-    '/gallery/image_7.webp',
-    '/gallery/image_8.webp',
-    '/gallery/image_9.webp',
-    '/gallery/image_10.webp',
-    '/gallery/image_11.webp',
-    '/gallery/image_12.webp',
-    '/gallery/image_13.webp',
-    '/gallery/image_14.webp',
-    '/gallery/image_15.webp',
-    '/gallery/image_16.webp',
-    '/gallery/image_17.webp',
-    '/gallery/image_18.webp',
-    '/gallery/image_19.webp',
-    '/gallery/image_20.webp',
-    '/gallery/image_21.webp',
-    '/gallery/image_22.webp',
-    '/gallery/image_23.webp',
-    '/gallery/image_24.webp',
-    '/gallery/image_25.webp',
-    '/gallery/image_26.webp',
-    '/gallery/image_27.webp'
+    "/gallery/image_1.webp",
+    "/gallery/image_2.webp",
+    "/gallery/image_3.webp",
+    "/gallery/image_4.webp",
+    "/gallery/image_5.webp",
+    "/gallery/image_6.webp",
+    "/gallery/image_7.webp",
+    "/gallery/image_8.webp",
+    "/gallery/image_9.webp",
+    "/gallery/image_10.webp",
+    "/gallery/image_11.webp",
+    "/gallery/image_12.webp",
+    "/gallery/image_13.webp",
+    "/gallery/image_14.webp",
+    "/gallery/image_15.webp",
+    "/gallery/image_16.webp",
+    "/gallery/image_17.webp",
+    "/gallery/image_18.webp",
+    "/gallery/image_19.webp",
+    "/gallery/image_20.webp",
+    "/gallery/image_21.webp",
+    "/gallery/image_22.webp",
+    "/gallery/image_23.webp",
+    "/gallery/image_24.webp",
+    "/gallery/image_25.webp",
+    "/gallery/image_26.webp",
+    "/gallery/image_27.webp",
   ];
 
   // Organize images into columns for masonry layout
   const columns = [
     imgLinks.slice(0, Math.ceil(imgLinks.length / 3)),
     imgLinks.slice(Math.ceil(imgLinks.length / 3), Math.ceil(imgLinks.length / 3) * 2),
-    imgLinks.slice(Math.ceil(imgLinks.length / 3) * 2)
+    imgLinks.slice(Math.ceil(imgLinks.length / 3) * 2),
   ];
 
   // Extract image number from link
   const getImageNumber = (link: string) => {
     const match = link.match(/image_(\d+)\.webp/);
-    return match ? match[1] : '';
+    return match ? match[1] : "";
   };
 
   const container = {
@@ -56,24 +56,24 @@ const Gallery = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.1
-      }
-    }
+        delayChildren: 0.1,
+      },
+    },
   };
 
   const item = {
-    hidden: { 
+    hidden: {
       opacity: 0,
-      y: 10
+      y: 10,
     },
-    show: { 
+    show: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.4,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   // Random offset for each image
@@ -83,7 +83,7 @@ const Gallery = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-white to-transparent dark:from-transparent dark:via-gray-900 dark:to-transparent py-24 sm:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-white to-transparent py-24 sm:py-32 dark:from-transparent dark:via-gray-900 dark:to-transparent">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] dark:opacity-20"></div>
 
@@ -92,21 +92,17 @@ const Gallery = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mx-auto max-w-2xl text-center mb-16"
+          className="mx-auto mb-16 max-w-2xl text-center"
         >
-          <div className="mb-8 inline-flex items-center justify-center gap-2 rounded-full bg-blue-500/10 dark:bg-blue-400/10 px-4 py-2 text-base text-blue-700 dark:text-blue-300 ring-1 ring-blue-700/10 dark:ring-blue-400/20">
+          <div className="mb-8 inline-flex items-center justify-center gap-2 rounded-full bg-blue-500/10 px-4 py-2 text-base text-blue-700 ring-1 ring-blue-700/10 dark:bg-blue-400/10 dark:text-blue-300 dark:ring-blue-400/20">
             <Camera className="h-5 w-5" />
             Photo Gallery
           </div>
-          <h2 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl">
-            Capturing{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-sky-500 dark:from-blue-400 dark:to-sky-300 bg-clip-text text-transparent">
-              Moments
-            </span>
+          <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-gray-50">
+            Capturing{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent dark:from-blue-400 dark:to-sky-300">Moments</span>
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-            A collection of memories from our previous conferences
-          </p>
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">A collection of memories from our previous conferences</p>
         </motion.div>
 
         <motion.div
@@ -114,7 +110,7 @@ const Gallery = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
           {columns.map((column, colIndex) => (
             <div key={colIndex} className="space-y-8">
@@ -125,13 +121,13 @@ const Gallery = () => {
                     <DialogTrigger asChild>
                       <motion.div
                         variants={item}
-                        whileHover={{ 
+                        whileHover={{
                           scale: 1.02,
-                          transition: { duration: 0.3, ease: "easeOut" }
+                          transition: { duration: 0.3, ease: "easeOut" },
                         }}
                         className={cn(
                           "group relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500/5 to-sky-500/5 p-1",
-                          "backdrop-blur-xl transition-all duration-300 cursor-pointer",
+                          "cursor-pointer backdrop-blur-xl transition-all duration-300",
                           "hover:from-blue-500/10 hover:to-sky-500/10 dark:from-blue-400/5 dark:to-sky-300/5",
                           `translate-y-[${randomOffset}px]`
                         )}
@@ -141,13 +137,13 @@ const Gallery = () => {
                           <Image
                             src={link}
                             alt={`Gallery image ${getImageNumber(link)}`}
-                            className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-[1.02]"
+                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                             width={1000}
                             height={1000}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                             <div className="absolute bottom-0 left-0 right-0 p-4">
-                              <p className="text-white text-sm font-medium transform transition-all duration-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                              <p className="translate-y-4 transform text-sm font-medium text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                                 Image {getImageNumber(link)}
                               </p>
                             </div>
@@ -165,7 +161,7 @@ const Gallery = () => {
                         <Image
                           src={link}
                           alt={`Gallery image ${getImageNumber(link)} - Enlarged View`}
-                          className="object-contain rounded-lg"
+                          className="rounded-lg object-contain"
                           width={1920}
                           height={1080}
                           priority
