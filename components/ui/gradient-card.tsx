@@ -9,7 +9,6 @@ interface GradientCardProps {
   gradient: string;
   iconGradient: string;
   className?: string;
-  // For stats variant
   value?: string;
   isStatCard?: boolean;
 }
@@ -29,7 +28,7 @@ export function GradientCard({ icon: Icon, title, description, gradient, iconGra
       )}
     >
       {isStatCard ? (
-        // Stats Card Layout
+       
         <div className="flex h-full flex-col justify-between">
           <div>
             {Icon && (
@@ -42,7 +41,6 @@ export function GradientCard({ icon: Icon, title, description, gradient, iconGra
           <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{title}</p>
         </div>
       ) : (
-        // Feature Card Layout
         <>
           {Icon && (
             <div className={cn("inline-flex rounded-2xl bg-gradient-to-br p-3", iconGradient)}>
@@ -54,7 +52,6 @@ export function GradientCard({ icon: Icon, title, description, gradient, iconGra
         </>
       )}
 
-      {/* Decorative elements */}
       <div className="absolute right-0 top-0 -z-10 h-24 w-24 -translate-y-1/3 translate-x-1/3 transform rounded-full bg-white/10 blur-2xl transition-transform duration-500 ease-out group-hover:translate-x-0 group-hover:translate-y-0 dark:bg-white/5"></div>
       <div className="absolute bottom-0 left-0 -z-10 h-16 w-16 -translate-x-1/2 translate-y-1/2 transform rounded-full bg-white/10 blur-xl transition-transform duration-500 ease-out group-hover:translate-x-0 group-hover:translate-y-0 dark:bg-white/5"></div>
     </motion.div>

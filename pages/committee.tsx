@@ -103,7 +103,6 @@ export default function Committee() {
         </motion.div>
       </div>
 
-      {/* Decorative Elements - Adjusted positioning and size */}
       <div className="absolute right-0 top-1/3 -z-10 h-64 w-64 translate-x-1/4 transform rounded-full bg-gradient-to-br from-blue-500/20 to-sky-500/20 blur-3xl" />
       <div className="absolute bottom-1/3 left-0 -z-10 h-64 w-64 -translate-x-1/4 transform rounded-full bg-gradient-to-br from-sky-500/20 to-blue-500/20 blur-3xl" />
     </section>

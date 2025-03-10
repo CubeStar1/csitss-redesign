@@ -6,7 +6,6 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
 const Gallery = () => {
-  // Image links array
   const imgLinks = [
     "/gallery/image_1.webp",
     "/gallery/image_2.webp",
@@ -37,14 +36,12 @@ const Gallery = () => {
     "/gallery/image_27.webp",
   ];
 
-  // Organize images into columns for masonry layout
   const columns = [
     imgLinks.slice(0, Math.ceil(imgLinks.length / 3)),
     imgLinks.slice(Math.ceil(imgLinks.length / 3), Math.ceil(imgLinks.length / 3) * 2),
     imgLinks.slice(Math.ceil(imgLinks.length / 3) * 2),
   ];
 
-  // Extract image number from link
   const getImageNumber = (link: string) => {
     const match = link.match(/image_(\d+)\.webp/);
     return match ? match[1] : "";
@@ -76,7 +73,6 @@ const Gallery = () => {
     },
   };
 
-  // Random offset for each image
   const getRandomOffset = () => {
     const offsets = [-4, -2, 0, 2, 4];
     return offsets[Math.floor(Math.random() * offsets.length)];

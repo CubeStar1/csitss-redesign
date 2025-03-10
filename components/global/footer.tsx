@@ -7,7 +7,6 @@ import { MapPin, Mail, Phone } from "lucide-react";
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
-  // Split navigation links into columns
   const column1 = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
