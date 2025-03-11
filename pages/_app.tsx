@@ -6,6 +6,8 @@ import { Header } from "@/components/global/header";
 import { Footer } from "@/components/global/footer";
 import { ThemeProvider } from "@/components/global/theme-provider";
 import NextTopLoader from "nextjs-toploader";
+import Script from "next/script";
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -38,6 +40,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
         <div id="recaptcha-container" />
       </main>
+      <Script id="clarity-script" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "qmllpbq4kz");
+          `}
+        </Script> 
       <Footer />
     </ThemeProvider>
   );
