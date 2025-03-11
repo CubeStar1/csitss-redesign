@@ -2,7 +2,7 @@
 
 A website for International Conference on Computational Systems and Information Technology for Sustainable Solutions (CSITSS) built with Next.js, TypeScript, and Tailwind CSS.
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 - Node.js (>18.18.0)
 - npm (>9.0.0)
@@ -44,7 +44,7 @@ To start the production server:
 npm start
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 csitss-redesign/
